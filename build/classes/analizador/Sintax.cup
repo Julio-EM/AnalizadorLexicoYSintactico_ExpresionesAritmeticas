@@ -1,0 +1,35 @@
+package analizador;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+    public Symbol getS(){
+        return this.s;
+    }
+:};
+
+
+
+terminal Variable, Igual, Suma, Resta, Multiplicacion, Division, Entero, Decimal, ERROR;
+
+non terminal E, T, F, Ep, Tp;
+
+start with E;
+
+E ::= Variable Igual T Ep ;
+
+Ep ::= Suma T Ep | Resta T Ep | ;
+
+T ::= F Tp ;
+
+Tp ::= Multiplicacion F Tp | Division F Tp | ;
+
+F ::= Variable | Entero | Decimal ;
+
+
